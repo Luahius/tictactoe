@@ -3,6 +3,20 @@ const state = {
   xIsNext: true
 }
 
+const addText = (state) => {
+  const getGameInfoBox = document.getElementsByClassName('game-info');
+  const createStateBox = document.createElement('div');
+  const createStateText = document.createTextNode(`Next player: ${state.xIsNext ? 'X' : 'O'}`);
+  createStateBox.appendChild(createStateText);
+  getGameInfoBox[0].appendChild(createStateBox);
+}
+
+const changeText = (state) => {
+  const chang = document.getElementsByClassName('game-info');
+  const child = chang[0].firstElementChild;
+  child.innerHTML=`Next player: ${state.xIsNext ? 'X' : 'O'}`;
+}
+
 function square(e) {
   const squarePoint = document.getElementById(e.id);
   const squares = state.squares.slice();
@@ -13,11 +27,7 @@ function square(e) {
   console.dir(state);
   squarePoint.textContent = squares[e.id];
 
-  const chang = document.getElementsByClassName('game-info');
-  const child = chang[0].firstElementChild;
-  child.innerHTML=`Next player: ${state.xIsNext ? 'X' : 'O'}`;
-
-  console.dir(k);
+  changeText(state);
 
 }
 
@@ -27,10 +37,7 @@ function handleClick(e) {
 }
 
 (function() {
-  const getGameInfoBox = document.getElementsByClassName('game-info');
-  const createStateBox = document.createElement('div');
-  const createStateText = document.createTextNode(`Next player: ${state.xIsNext ? 'X' : 'O'}`);
-  createStateBox.appendChild(createStateText);
-  getGameInfoBox[0].appendChild(createStateBox);
+  addText(state);
   
 }());
+
